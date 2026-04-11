@@ -375,7 +375,7 @@ body {
 }
 
 .action-btn:hover { color: var(--text-main); }
-.action-btn i { width: 20px; height: 20px; stroke-width: 1.5; }
+.action-btn i { width: 14px; height: 14px; stroke-width: 1.5; }
 
 /* ─── Table ──────────────────────────────────────────────── */
 .table-wrapper {
