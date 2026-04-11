@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Візуальний Прототип - Бізнес-Кабінет</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <button class="btn-new-shipment" onclick="alert('Нове відправлення')">
+                    <div class="icon-rhombus">
+                        <i data-lucide="plus" class="plus-icon"></i>
+                    </div>
+                    Нове відправлення
+                </button>
+                
+                <div class="sidebar-divider"></div>
+
+                <nav class="sidebar-nav">
+                    <div class="nav-group is-expanded">
+                        <button class="nav-item nav-item-header">
+                            <i data-lucide="package-check" class="text-red"></i> 
+                            <span class="nav-text">Посилки</span>
+                            <i data-lucide="chevron-up" class="chevron"></i>
+                        </button>
+                        <div class="nav-subitems">
+                            <a href="#" class="nav-subitem">Чернетки</a>
+                            <a href="#" class="nav-subitem active">
+                                <span class="square"></span> Вихідні
+                            </a>
+                            <a href="#" class="nav-subitem">Вхідні</a>
+                            <a href="#" class="nav-subitem">Архівовані</a>
+                            <a href="#" class="nav-subitem">Видалені</a>
+                            <a href="#" class="nav-subitem">Всі посилки</a>
+                        </div>
+                    </div>
+                    
+                    <a href="#" class="nav-item">
+                        <i data-lucide="layout-template" class="menu-icon"></i> <span class="nav-text">Шаблони</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i data-lucide="list" class="menu-icon"></i> <span class="nav-text">Реєстри</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i data-lucide="truck" class="menu-icon"></i> <span class="nav-text">Виклики кур'єра</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i data-lucide="calculator" class="menu-icon"></i> <span class="nav-text">Калькулятор вартості</span>
+                    </a>
+                </nav>
+            </div>
+            
+            <div class="sidebar-bottom">
+                <div class="sidebar-divider"></div>
+                <button class="nav-item collapse-btn">
+                    <i data-lucide="panel-left-close"></i> <span class="nav-text-light">Згорнути меню</span>
+                </button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div class="logo-absolute">NOVA POST</div>
+                <div class="topbar-right">
+                    <button class="lang-switch">УКР</button>
+                    <div class="divider"></div>
+                    <button class="user-avatar">КА</button>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
+                <div class="page-header">
+                    <h1>Вихідні <i data-lucide="info" class="icon-info"></i></h1>
+                </div>
+
+                <div class="toolbar">
+                    <div class="search-box">
+                        <i data-lucide="search" class="icon-search"></i>
+                        <input type="text" id="searchInput" placeholder="Пошук контактів та посилок / Відстеження за номером">
+                        <div class="search-btn-inner">пошук</div>
+                    </div>
+                    
+                    <div class="actions">
+                        <button class="action-btn" title="Фільтри"><i data-lucide="sliders-horizontal"></i></button>
+                        <button class="action-btn" title="Завантажити"><i data-lucide="download"></i></button>
+                        <button class="action-btn" title="Колонки"><i data-lucide="layout-panel-left"></i></button>
+                        <button class="action-btn" title="Оновити"><i data-lucide="rotate-cw"></i></button>
+                    </div>
+                </div>
+
+                <div class="table-wrapper">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th class="sticky-col-left">Номер посилки</th>
+                                <th>Назва посилки</th>
+                                <th class="col-tracking">Трекінг статус</th>
+                                <th>Дата створення</th>
+                                <th>Плановий час доставки</th>
+                                <th>Оголошена цінність</th>
+                                <th>До сплати</th>
+                                <th>Післяплата</th>
+                                <th class="col-sent-postpay sticky-col-right-before">Відправлена<br>післяплата</th>
+                                <th class="sticky-col-right"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <!-- Rows will be injected here via JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination">
+                    <div class="rows-per-page">
+                        <select id="rowsSelect">
+                            <option value="10">10</option>
+                            <option value="20" selected>20</option>
+                            <option value="50">50</option>
+                        </select>
+                        <i data-lucide="chevron-down" class="select-icon"></i>
+                    </div>
+                    <div class="page-controls">
+                        <button class="page-btn"><i data-lucide="chevron-left"></i></button>
+                        <span class="current-page">1</span>
+                        <button class="page-btn"><i data-lucide="chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- Tracking Side Drawer -->
+    <div class="tracking-drawer" id="trackingDrawer">
+        <div class="drawer-header">
+            <button class="drawer-back" onclick="closeTrackingModal()">
+                <i data-lucide="arrow-left"></i>
+            </button>
+            <span class="drawer-title">Шлях посилки</span>
+            <button class="drawer-close" onclick="closeTrackingModal()">
+                <i data-lucide="x"></i>
+            </button>
+        </div>
+        <div class="drawer-parcel-id" id="drawerParcelId"></div>
+        <div class="drawer-timeline" id="drawerTimeline"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
