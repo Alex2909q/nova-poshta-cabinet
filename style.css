@@ -789,16 +789,11 @@ body {
     right: 6px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
-    color: var(--text-muted);
+    color: var(--text-secondary);
     opacity: 1;
     transition: all 0.15s;
-}
-
-.data-table th[data-sort]:hover::after {
-    opacity: 1;
-    color: var(--text-main);
 }
 
 .data-table th.sort-active {
