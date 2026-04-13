@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-
-
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
@@ -85,7 +83,7 @@
                 <div class="toolbar">
                     <div class="search-box">
                         <i data-lucide="search" class="icon-search"></i>
-                                <input type="text" id="searchInput" placeholder="Трекінг посилок">
+                        <input type="text" id="searchInput" placeholder="Пошук контактів та посилок / Трекінг посилок">
                         <div class="search-btn-inner">пошук</div>
                     </div>
                     
@@ -101,15 +99,15 @@
                     <table class="data-table">
                         <thead>
                             <tr>
-                                <th class="sticky-col-left">Номер посилки</th>
-                                <th>Назва посилки</th>
-                                <th class="col-tracking">Трекінг статус</th>
-                                <th>Дата створення</th>
-                                <th>Плановий час доставки</th>
-                                <th>Оголошена цінність</th>
-                                <th>До сплати</th>
-                                <th>Післяплата</th>
-                                <th class="col-sent-postpay sticky-col-right-before">Відправлена<br>післяплата</th>
+                                <th class="sticky-col-left" data-sort="id">Номер посилки</th>
+                                <th data-sort="name">Назва посилки</th>
+                                <th class="col-tracking" data-sort="status">Трекінг статус</th>
+                                <th data-sort="created">Дата створення</th>
+                                <th data-sort="delivery">Плановий час доставки</th>
+                                <th data-sort="value">Оголошена цінність</th>
+                                <th data-sort="toPay">До сплати</th>
+                                <th data-sort="postpay">Післяплата</th>
+                                <th class="col-sent-postpay sticky-col-right-before" data-sort="sentPostpay">Відправлена<br>післяплата</th>
                                 <th class="sticky-col-right"></th>
                             </tr>
                         </thead>
@@ -153,4 +151,4 @@
     </div>
     <script src="script.js"></script>
 </body>
-</html>
+    </html>
