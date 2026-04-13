@@ -34,6 +34,23 @@ let multiMode    = false;   // true when user pasted multiple IDs
 let multiIds     = [];      // list of pasted IDs (normalised)
 let filteredData = [...allData];
 
+// Sorting state
+let sortCol = null;   // key of currently sorted column, or null
+let sortDir = 'asc';  // 'asc' | 'desc'
+
+// Column key → comparator value extractor
+const SORT_KEYS = {
+    id:          d => d.id,
+    name:        d => d.name,
+    status:      d => d.status,
+    created:     d => d.created,
+    delivery:    d => d.delivery,
+    value:       d => parseFloat(d.value)  || d.value,
+    toPay:       d => parseFloat(d.toPay)  || d.toPay,
+    postpay:     d => parseFloat(d.postpay)|| d.postpay,
+    sentPostpay: d => parseFloat(d.sentPostpay) || d.sentPostpay,
+};
+
 // --- DOM ---
 const tableBody       = document.getElementById('tableBody');
 const searchInput     = document.getElementById('searchInput');
@@ -142,12 +159,41 @@ function handleSearch() {
     renderTable();
 }
 
+// ─── Sort data ────────────────────────────────────────────────
+function applySorting(data) {
+    if (!sortCol || !SORT_KEYS[sortCol]) return data;
+    const getter = SORT_KEYS[sortCol];
+    return [...data].sort((a, b) => {
+        const av = getter(a);
+        const bv = getter(b);
+        if (av === '—' && bv === '—') return 0;
+        if (av === '—') return 1;
+        if (bv === '—') return -1;
+        if (av < bv) return sortDir === 'asc' ? -1 : 1;
+        if (av > bv) return sortDir === 'asc' ?  1 : -1;
+        return 0;
+    });
+}
+
+// Update sort indicators in <thead>
+function updateSortHeaders() {
+    document.querySelectorAll('.data-table th[data-sort]').forEach(th => {
+        const key = th.dataset.sort;
+        th.classList.remove('sort-asc', 'sort-desc', 'sort-active');
+        if (key === sortCol) {
+            th.classList.add('sort-active', sortDir === 'asc' ? 'sort-asc' : 'sort-desc');
+        }
+    });
+}
+
 // ─── Render table ─────────────────────────────────────────────
 function renderTable() {
     tableBody.innerHTML = '';
+    updateSortHeaders();
 
-    const start = (currentPage - 1) * rowsPerPage;
-    const page  = filteredData.slice(start, start + rowsPerPage);
+    const sorted = applySorting(filteredData);
+    const start  = (currentPage - 1) * rowsPerPage;
+    const page   = sorted.slice(start, start + rowsPerPage);
 
     if (page.length === 0) {
         tableBody.innerHTML = `<tr><td colspan="10" style="text-align:center;padding:32px;color:var(--text-muted)">Посилок не знайдено</td></tr>`;
@@ -294,6 +340,23 @@ navSubitems.forEach(item => {
 });
 
 actionButtons.forEach(btn => btn.addEventListener('click', () => alert('Ця дія буде доступна в повноцінній версії!')));
+
+// ─── Column sort click ────────────────────────────────────────
+document.querySelector('.data-table thead').addEventListener('click', e => {
+    const th = e.target.closest('th[data-sort]');
+    if (!th) return;
+    const key = th.dataset.sort;
+    if (sortCol === key) {
+        // cycle: asc → desc → none
+        if (sortDir === 'asc') { sortDir = 'desc'; }
+        else { sortCol = null; sortDir = 'asc'; }
+    } else {
+        sortCol = key;
+        sortDir = 'asc';
+    }
+    currentPage = 1;
+    renderTable();
+});
 
 // ─── Init ─────────────────────────────────────────────────────
 if (sidebar.classList.contains('collapsed') && navGroup.querySelector('.nav-subitem.active')) {
