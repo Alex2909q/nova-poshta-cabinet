@@ -145,7 +145,7 @@ body {
 
 .text-red { color: var(--primary-red) !important; }
 
-/* ─── Subitems ── */
+/* ── Subitems ── */
 .nav-subitems {
     display: flex;
     flex-direction: column;
@@ -450,7 +450,7 @@ body {
     border: none;
     cursor: pointer;
     color: var(--text-muted);
-    padding: 3px 5px;;
+    padding: 3px 5px;
     border-radius: 4px;
     display: flex;
     align-items: center;
@@ -782,18 +782,18 @@ body {
 }
 
 .data-table th[data-sort]::after {
-    content: '↕';
+    content: '\2195';
     display: inline-block;
     margin-left: 5px;
-    font-size: 9px;
-    opacity: 0.25;
+    font-size: 10px;
+    opacity: 0.3;
     vertical-align: middle;
     line-height: 1;
     transition: opacity 0.15s;
 }
 
 .data-table th[data-sort]:hover::after {
-    opacity: 0.5;
+    opacity: 0.6;
 }
 
 .data-table th.sort-active {
@@ -802,13 +802,13 @@ body {
 }
 
 .data-table th.sort-asc::after {
-    content: '↑';
+    content: '\2191';
     opacity: 1;
     color: var(--primary-red);
 }
 
 .data-table th.sort-desc::after {
-    content: '↓';
+    content: '\2193';
     opacity: 1;
     color: var(--primary-red);
 }
